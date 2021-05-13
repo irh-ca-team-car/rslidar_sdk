@@ -5,7 +5,7 @@ common:
                                                         #3: packet message comes from Pcap file
                                                         #4: packet message comes from Protobuf-UDP
                                                         #5: point cloud comes from Protobuf-UDP
-  send_packet_ros: false                                #true: Send packets through ROS or ROS2(Used to record packet)
+  send_packet_ros: true                                 #true: Send packets through ROS or ROS2(Used to record packet)
   send_point_cloud_ros: true                            #true: Send point cloud through ROS or ROS2
   send_packet_proto: false                              #true: Send packets through Protobuf-UDP
   send_point_cloud_proto: false                         #true: Send point cloud through Protobuf-UDP
@@ -13,8 +13,9 @@ common:
 
 lidar:
   - driver:
-      lidar_type: RS128            #LiDAR type - RS16, RS32, RSBP, RS128, RS80, RSM1, RSHELIOS
-      frame_id: /rslidar           #Frame id of message
+      lidar_type: RS16            #LiDAR type - RS16, RS32, RSBP, RS128, RS80, RSM1, RSHELIOS
+      frame_id: /soul/roof/rslidar           #Frame id of message
+      multi_cast_address: 224.1.1.1
       msop_port: 6699              #Msop port of lidar
       difop_port: 7788             #Difop port of lidar
       start_angle: 0               #Start angle of point cloud
@@ -24,9 +25,9 @@ lidar:
       use_lidar_clock: false       #True--Use the lidar clock as the message timestamp
                                    #False-- Use the system clock as the timestamp  
     ros:
-      ros_recv_packet_topic: /rslidar_packets          #Topic used to receive lidar packets from ROS
-      ros_send_packet_topic: /rslidar_packets          #Topic used to send lidar packets through ROS
-      ros_send_point_cloud_topic: /rslidar_points      #Topic used to send point cloud through ROS
+      ros_recv_packet_topic: /soul/roof/lidar/packets          #Topic used to receive lidar packets from ROS
+      ros_send_packet_topic: /soul/roof/lidar/packets          #Topic used to send lidar packets through ROS
+      ros_send_point_cloud_topic: /soul/roof/lidar/points      #Topic used to send point cloud through ROS
     proto:
       point_cloud_recv_port: 60021                     #Port number used for receiving point cloud 
       point_cloud_send_port: 60021                     #Port number which the point cloud will be send to
