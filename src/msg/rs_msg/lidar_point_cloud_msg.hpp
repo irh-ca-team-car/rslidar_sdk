@@ -31,23 +31,6 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************************************************************/
 
 #pragma once
-#include <string>
-#include <array>
-#include <pcl/io/io.h>
-#include <pcl/point_types.h>
-struct RsPointXYZIRT
-{
-  PCL_ADD_POINT4D;
-  uint8_t intensity;
-  uint16_t ring = 0;
-  double timestamp = 0;
-  EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-} EIGEN_ALIGN16;
-POINT_CLOUD_REGISTER_POINT_STRUCT(RsPointXYZIRT, (float, x, x)(float, y, y)(float, z, z)(std::uint8_t, intensity, intensity)(
-                                                     std::uint16_t, ring, ring)(double, timestamp, timestamp))
-#ifdef POINT_TYPE_XYZI
-typedef pcl::PointXYZI PointT;
-#elif POINT_TYPE_XYZIRT
 
 #include "rs_driver/msg/point_cloud_msg.hpp"
 
@@ -56,4 +39,3 @@ typedef PointCloudT<PointXYZIRT> LidarPointCloudMsg;
 #else
 typedef PointCloudT<PointXYZI> LidarPointCloudMsg;
 #endif
-
